@@ -1,0 +1,675 @@
+/* ======================================================
+   PLANT IDENTIFICATION ONLINE
+   VERSION 1.0
+   GENERAL STYLES
+====================================================== */
+
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f9f4;
+}
+
+/* ==========================
+   MAIN CONTAINER
+========================== */
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+    padding:25px;
+
+    background:#ffffff;
+
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,.15);
+
+    text-align:center;
+    box-sizing:border-box;
+}
+
+/* ==========================
+   HEADINGS
+========================== */
+
+h1{
+    color:#000;
+}
+
+.result h2{
+    color:#019909;
+}
+
+.uploaded-title{
+    color:#ec6297;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:20px;
+    text-decoration:underline;
+}
+
+/* ==========================
+   FILE INPUT
+========================== */
+
+input[type="file"]{
+    margin:20px;
+}
+
+#plantImage{
+    width:100%;
+    max-width:420px;
+    padding:12px;
+
+    border:2px dashed #2e8b57;
+    border-radius:12px;
+
+    background:#f8fff9;
+
+    cursor:pointer;
+    transition:.3s ease;
+    box-sizing:border-box;
+}
+
+#plantImage:hover{
+    background:#eefaf1;
+    border-color:#1f6d43;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+button{
+    width:80%;
+
+    padding:15px 22px;
+
+    border:none;
+    border-radius:25px;
+
+    background:#099610;
+    color:#fff;
+
+    font-size:22px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+button:hover{
+    background:#1d7512;
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(46,125,50,.35);
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+/* ==========================
+   RESULT
+========================== */
+
+.result{
+    margin-top:30px;
+    padding:20px;
+
+    text-align:left;
+
+    background:#f1fff1;
+    border-radius:10px;
+}
+
+/* ======================================================
+   PLANT RESULT LAYOUT
+====================================================== */
+
+.plant-result{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-top:20px;
+
+    animation:fadeUp .6s ease;
+    transition:transform .35s ease, box-shadow .35s ease;
+}
+
+.plant-result:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 28px rgba(0,0,0,.12);
+}
+
+/* ==========================
+   PLANT INFORMATION
+========================== */
+
+.plant-info{
+    flex:1;
+    text-align:left;
+    font-size:22px;
+    line-height:1.4;
+
+    transition:transform .35s ease, box-shadow .35s ease;
+}
+
+.plant-info:hover{
+    transform:scale(1.03);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+/* ==========================
+   PLANT IMAGE
+========================== */
+
+.plant-image{
+    flex-shrink:0;
+}
+
+.plant-image img{
+    width:250px;
+    height:220px;
+
+    object-fit:cover;
+
+    border:2px solid #2e7d32;
+    border-radius:12px;
+
+    transition:transform .4s ease, box-shadow .4s ease;
+}
+
+.plant-image img:hover{
+    transform:scale(1.03);
+    box-shadow:0 12px 30px rgba(0,0,0,.20);
+}
+
+/* ==========================
+   INFORMATION CARDS
+========================== */
+
+.info-card{
+
+    width:90%;
+    margin:15px auto;
+    padding:18px;
+
+    text-align:left;
+
+    background:#f8f9fa;
+    border-left:6px solid #2e8b57;
+    border-radius:10px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+    opacity:0;
+    transform:translateY(20px);
+
+    animation:fadeInUp .7s ease forwards;
+
+    transition:transform .3s ease,
+               box-shadow .3s ease;
+
+    cursor:default;
+}
+
+.info-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.info-card h3{
+    margin-bottom:10px;
+
+    color:#2e8b57;
+
+    font-size:20px;
+    font-weight:700;
+}
+
+.info-card p{
+    color:#333;
+    font-size:16px;
+    line-height:1.8;
+}
+
+/* ==========================
+   LEARN MORE
+========================== */
+
+.plant-details{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+
+    transition:max-height .3s ease,
+               opacity .3s ease;
+}
+
+.plant-details.show{
+    max-height:5000px;
+    opacity:1;
+    margin-top:20px;
+}
+
+#arrow{
+    font-size:16px;
+    transition:.3s;
+}
+
+/* ======================================================
+   LOADING SCREEN
+====================================================== */
+
+#loading{
+    display:none;
+    text-align:center;
+    margin-top:25px;
+    animation:fadeUp .4s ease;
+}
+
+.loading-title{
+    width:100%;
+    margin:15px 0;
+    text-align:center;
+}
+
+.loading-subtitle{
+    width:100%;
+    margin-top:10px;
+    text-align:center;
+    color:#2e7d32;
+    font-weight:bold;
+}
+
+/* ==========================
+   LOADER
+========================== */
+
+.loader{
+    width:50px;
+    height:50px;
+
+    margin:0 auto 15px;
+
+    border:5px solid #ddd;
+    border-top:5px solid #2e8b57;
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+}
+
+/* ==========================
+   PROGRESS BAR
+========================== */
+
+.progress{
+    width:80%;
+    max-width:500px;
+    height:25px;
+
+    margin:20px auto;
+
+    background:#51e932;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-container{
+    width:80%;
+    max-width:350px;
+    height:12px;
+
+    margin:15px auto;
+
+    background:#e0e0e0;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+
+    background:linear-gradient(90deg,#dee676,#05a31f);
+
+    color:#fff;
+    text-align:center;
+    line-height:25px;
+
+    border-radius:20px;
+
+    transition:width .4s ease;
+}
+
+#progressText{
+    margin-top:8px;
+
+    text-align:center;
+
+    font-weight:bold;
+    color:#3452a5;
+}
+
+/* ==========================
+   RESULT ANIMATION
+========================== */
+
+.result-info{
+    opacity:0;
+    transform:scale(.95);
+    animation:zoomInInfo .7s ease forwards;
+}
+
+/* ==========================
+   SHARE BUTTON
+========================== */
+
+#shareBtn{
+
+    display:inline-block;
+    width:auto;
+
+    margin:20px 10px 20px 0;
+    padding:10px 22px;
+
+    border:none;
+    border-radius:30px;
+
+    background:#0967f5;
+    color:#fff;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+#shareBtn:hover{
+    background:#3532cf;
+    transform:translateY(-2px);
+}
+
+/* ==========================
+   LEARN MORE BUTTON
+========================== */
+
+.learn-more-btn{
+
+    display:inline-block;
+    width:auto;
+
+    margin:20px 0;
+    padding:10px 22px;
+
+    border:none;
+    border-radius:30px;
+
+    background:#148f6a;
+    color:#fff;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.learn-more-btn:hover{
+    background:#8415b8;
+    transform:translateY(-2px);
+}
+
+/* ==========================
+   KEYFRAME ANIMATIONS
+========================== */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes fadeInUp{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes zoomInInfo{
+
+    from{
+        opacity:0;
+        transform:scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+@keyframes spin{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+/* ===========================
+   NAVIGATION BAR
+=========================== */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#148831;
+    padding:18px 8%;
+    box-shadow:0 4px 12px rgba(1,114,1,0.25);
+}
+
+.logo a{
+    color:white;
+    text-decoration:none;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:17px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#8d8bff;
+}
+
+.nav-links a.active{
+    color:#d8f5d8;
+    border-bottom:2px solid rgb(250, 246, 2);
+    padding-bottom:4px;
+}
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .logo a{
+        font-size:22px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:18px;
+    }
+
+    .nav-links a{
+        font-size:16px;
+    }
+
+}
+
+/* ======================================================
+   MOBILE RESPONSIVE
+====================================================== */
+
+@media (max-width:768px){
+
+    .container{
+        width:95%;
+        padding:18px;
+    }
+
+    .navbar{
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:15px;
+
+    padding:18px 15px;
+}
+
+    .logo{
+        font-size:22px;
+        justify-content:center;
+        text-align:center;
+    }
+
+    .nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+
+    gap:20px;
+
+    width:100%;
+}
+
+    .nav-links a{
+    font-size:16px;
+    font-weight:600;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    transition:all .3s ease;
+}
+
+    .plant-result{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+}
+
+.plant-info{
+    width:100%;
+    text-align:center;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.plant-image{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.plant-image img{
+    width:100%;
+    max-width:320px;
+    height:auto;
+    border-radius:12px;
+}
+
+    h1{
+        font-size:30px;
+    }
+
+    h2{
+        font-size:24px;
+    }
+
+    p{
+        font-size:16px;
+    }
+
+    button{
+        width:100%;
+        font-size:18px;
+    }
+
+    .progress,
+    .progress-container{
+        width:95%;
+    }
+
+    .info-card{
+        width:100%;
+        padding:16px;
+    }
+}
+
+a {
+    color: #3d3fbe;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    color: #28378f;
+    text-decoration: underline;
+}

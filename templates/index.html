@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plant Identification Online</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ==========================================
+         LOADING SCREEN
+    =========================================== -->
+
+    <div id="loading" style="display:none;">
+
+        <div class="loader"></div>
+
+        <p class="loading-title">
+            <strong>🌶 AI is Identifying your plant...</strong>
+        </p>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <p id="progressText">0%</p>
+
+        <p class="loading-subtitle">
+            Please wait a few seconds...
+        </p>
+
+    </div>
+
+    <!-- ==========================================
+         NAVIGATION BAR
+    =========================================== -->
+
+    <nav class="navbar">
+
+    <div class="logo">
+        <a href="/">🌿 Plant Identification Online</a>
+    </div>
+
+    <div class="nav-links">
+        <a href="/" class="active">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+    </div>
+
+</nav>
+
+    <!-- ==========================================
+         MAIN CONTAINER
+    =========================================== -->
+
+    <div class="container">
+
+        <h1>Plant Identification Online</h1>
+
+        <p>
+            Upload a plant image to identify it using AI for free.
+        </p>
+
+        <form action="/"
+              method="POST"
+              enctype="multipart/form-data"
+              onsubmit="showLoading()">
+
+            <input
+                type="file"
+                id="plantImage"
+                name="plantImage"
+                accept="image/*"
+                capture="environment"
+                required>
+
+            <br><br>
+
+            <button type="submit">
+                Identify Plant
+            </button>
+
+        </form>
+
+        {% if image_name %}
+
+        <hr>
+
+        <h3 class="uploaded-title">
+            Image Uploaded
+        </h3>
+
+        {% if common_name %}
+
+    {% if common_name == "Plant Not Found" %}
+
+<div class="result">
+
+    <h2 style="color:#d32f2f;">
+        ❌ Plant Not Found
+    </h2>
+
+    <p>
+        Please upload a clear image of a plant.
+    </p>
+
+</div>
+
+{% else %}
+
+<hr>
+
+<h2>
+    Plant Identification Result
+</h2>
+
+        <!-- ==========================================
+             RESULT SECTION
+        =========================================== -->
+
+        <div class="plant-result">
+
+            <div class="plant-info result-info">
+
+                <p>
+                    <strong>Common Name:</strong>
+                    {{ common_name }}
+                </p>
+
+                <p>
+                    <strong>Scientific Name:</strong>
+                    {{ scientific_name }}
+                </p>
+
+                <p>
+                    <strong>Family:</strong>
+                    {{ family_name }}
+                </p>
+
+                <p>
+                    <strong>Confidence:</strong>
+                    {{ confidence }}%
+                </p>
+
+            </div>
+
+            <div class="plant-image">
+
+                <img
+                    src="{{ url_for('static', filename='uploads/' + image_name) }}"
+                    class="image-uploaded plant-image"
+                    alt="Uploaded Plant">
+
+            </div>
+
+        </div>
+
+                <!-- ==========================================
+             CONFIDENCE BAR
+        =========================================== -->
+
+        <div class="progress">
+
+            <div class="progress-bar" data-confidence="{{ confidence }}">
+
+                {{ confidence }}%
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================
+             SHARE BUTTON
+        =========================================== -->
+
+        <button
+            id="shareBtn"
+            type="button"
+            onclick="shareResult()">
+
+            🔗 Share Result
+
+        </button>
+
+        <!-- ==========================================
+             LEARN MORE
+        =========================================== -->
+
+        <div class="learn-more">
+
+            <button
+                type="button"
+                class="learn-more-btn"
+                onclick="toggleLearnMore()">
+
+                🌿 Learn More About This Plant
+
+                <span id="arrow">▼</span>
+
+            </button>
+
+            <div
+                id="plant-details"
+                class="plant-details">
+
+                <!-- Description -->
+
+                <div class="info-card">
+
+                    <h3>📖 Description</h3>
+
+                    <p>
+                        {{ wiki_summary }}
+                    </p>
+
+                </div>
+
+                <!-- History & Region -->
+
+                <div class="info-card">
+
+                    <h3>📜 History &amp; Region</h3>
+
+                    <p style="white-space: pre-line;">
+                        {{ history }}
+                    </p>
+
+                </div>
+
+                <!-- Benefits -->
+
+                <div class="info-card">
+
+                    <h3>❤️ Benefits &amp; Uses</h3>
+
+                    <p style="white-space: pre-line;">
+                        {{ benefits }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}   <!-- Plant Not Found -->
+
+        {% endif %}   <!-- common_name -->
+
+        {% endif %}   <!-- image_name -->
+
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
