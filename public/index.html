@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Identification Online</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div id="loading" style="display:none;">
+        <div class="loader"></div>
+        <p class="loading-title">
+            <strong>🌶 AI is Identifying your plant...</strong>
+        </p>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p id="progressText">0%</p>
+        <p class="loading-subtitle">
+            Please wait a few seconds...
+        </p>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/">🌿 Plant Identification Online</a>
+        </div>
+        <div class="nav-links">
+            <a href="/" class="active">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Plant Identification Online</h1>
+        <p>
+            Upload a plant image to identify it using AI for free.
+        </p>
+
+        <form id="identifyForm" enctype="multipart/form-data">
+            <input
+                type="file"
+                id="plantImage"
+                name="plantImage"
+                accept="image/*"
+                capture="environment"
+                required>
+
+            <br><br>
+
+            <button type="submit" id="submitBtn">
+                Identify Plant
+            </button>
+        </form>
+
+        <div id="errorMessage" class="error-message" style="display:none;"></div>
+
+        <div id="results" style="display:none;">
+            <hr>
+            <h3 class="uploaded-title">Image Uploaded</h3>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

@@ -6,7 +6,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-API_KEY = "2b10RmSbz4eqs50XMgTz7kDfO"
+API_KEY = os.environ.get("PLANTNET_API_KEY", "")
 
 def get_wikipedia_summary(plant_name):
 

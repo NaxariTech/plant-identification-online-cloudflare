@@ -5,6 +5,7 @@ __pycache__/
 
 venv/
 .env
+.dev.vars
 
 static/uploads/*
 !static/uploads/.gitkeep
@@ -12,15 +13,8 @@ static/uploads/*
 .DS_Store
 Thumbs.db
 
-# Environment files
-.env
-.dev.vars
 node_modules/
+.wrangler/
 
-# Python
-__pycache__/
-*.pyc
-
-# Uploads
-static/uploads/*
-!static/uploads/.gitkeep
+# Legacy Flask files kept for reference
+# app.py, templates/, static/ can be removed after migration is verified
