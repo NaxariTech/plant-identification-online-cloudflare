@@ -11,3 +11,16 @@ static/uploads/*
 
 .DS_Store
 Thumbs.db
+
+# Environment files
+.env
+.dev.vars
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Uploads
+static/uploads/*
+!static/uploads/.gitkeep
