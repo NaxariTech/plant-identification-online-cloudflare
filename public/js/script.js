@@ -214,4 +214,60 @@ document.addEventListener("DOMContentLoaded", function () {
   if (form) {
     form.addEventListener("submit", identifyPlant);
   }
+
+  const btnCamera = document.getElementById("btnCamera");
+  const btnGallery = document.getElementById("btnGallery");
+  const plantImage = document.getElementById("plantImage");
+  const fileSelectedName = document.getElementById("fileSelectedName");
+  const fileNameSpan = document.getElementById("fileNameSpan");
+  const imagePreviewContainer = document.getElementById("imagePreviewContainer");
+  const imagePreview = document.getElementById("imagePreview");
+
+  if (btnCamera && plantImage) {
+    btnCamera.addEventListener("click", function () {
+      plantImage.setAttribute("capture", "environment");
+      plantImage.click();
+    });
+  }
+
+  if (btnGallery && plantImage) {
+    btnGallery.addEventListener("click", function () {
+      plantImage.removeAttribute("capture");
+      plantImage.click();
+    });
+  }
+
+  if (plantImage) {
+    plantImage.addEventListener("change", function () {
+      if (plantImage.files && plantImage.files[0]) {
+        const file = plantImage.files[0];
+        
+        // Show file name
+        if (fileNameSpan) {
+          fileNameSpan.textContent = file.name;
+        }
+        if (fileSelectedName) {
+          fileSelectedName.style.display = "inline-block";
+        }
+
+        // Show preview
+        if (imagePreview && imagePreviewContainer) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreviewContainer.style.display = "block";
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        if (fileSelectedName) {
+          fileSelectedName.style.display = "none";
+        }
+        if (imagePreviewContainer) {
+          imagePreviewContainer.style.display = "none";
+        }
+      }
+    });
+  }
 });
+
